@@ -1,5 +1,8 @@
 package Survey.Api.controller.endpoint;
 
+import Survey.Api.model.webService.Config;
+import Survey.Api.model.webService.Estacion;
+import Survey.Api.model.webService.Servicio;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,5 +22,18 @@ public class SurveyRestController {
         List<String> prueba = new ArrayList<>();
         prueba.add("Hola");
         return new ResponseEntity<List<String>>(prueba, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/config/", method = RequestMethod.GET)
+    public ResponseEntity<List<Config>> getAppConfiguration() {
+        List<Config> prueba = new ArrayList<Config>();
+        List<Servicio> servicios = new ArrayList<Servicio>();
+        List<String> estaciones = new ArrayList<String>();
+        estaciones.add("Portal 80");
+        estaciones.add("Granja");
+        estaciones.add("Minuto de Dios");
+        servicios.add(new Servicio("D20",estaciones));
+        prueba.add(new Config(servicios));
+        return new ResponseEntity<List<Config>>(prueba, HttpStatus.OK);
     }
 }
