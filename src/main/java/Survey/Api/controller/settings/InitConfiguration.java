@@ -8,4 +8,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @ComponentScan(basePackages = "Survey.Api")
 public class InitConfiguration {
+
+
 }
