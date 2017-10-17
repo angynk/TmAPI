@@ -2,6 +2,7 @@ package Survey.Api.controller.endpoint;
 
 import Survey.Api.model.webService.Config;
 import Survey.Api.model.webService.Estacion;
+import Survey.Api.model.webService.Resultado;
 import Survey.Api.model.webService.Servicio;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("test/")
 public class SurveyRestController {
 
 
+
+    @RequestMapping(value = "/new/", method = RequestMethod.POST)
+    public ResponseEntity<Resultado> sendSurveys() {
+        Resultado resultado = new Resultado();
+        resultado.setMensaje("Bien");
+        return new ResponseEntity<Resultado>(resultado, HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/test/", method = RequestMethod.GET)
     public ResponseEntity<List<String>> listAllUsers() {
