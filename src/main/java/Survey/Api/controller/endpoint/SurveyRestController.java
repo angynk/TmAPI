@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("test/")
+@RequestMapping("/test")
 public class SurveyRestController {
 
 
@@ -23,7 +23,16 @@ public class SurveyRestController {
     public ResponseEntity<Resultado> sendSurveys() {
         Resultado resultado = new Resultado();
         resultado.setMensaje("Bien");
+        System.out.println("Entre");
         return new ResponseEntity<Resultado>(resultado, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/newD/", method = RequestMethod.POST)
+    public Resultado senddATA() {
+        Resultado resultado = new Resultado();
+        resultado.setMensaje("Bien");
+        System.out.println("Entre Nuevo");
+        return resultado;
     }
 
     @RequestMapping(value = "/test/", method = RequestMethod.GET)
