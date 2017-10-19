@@ -1,4 +1,4 @@
-package Survey.Api.model.webService;
+package Survey.Api.model.entity;
 
 /**
  * Created by nataly on 16/10/2017.
@@ -7,6 +7,7 @@ package Survey.Api.model.webService;
 public class Resultado {
 
     private String mensaje;
+    private String status;
 
     public Resultado() {
     }
@@ -17,5 +18,13 @@ public class Resultado {
 
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

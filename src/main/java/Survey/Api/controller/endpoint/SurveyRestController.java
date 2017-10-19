@@ -1,6 +1,8 @@
 package Survey.Api.controller.endpoint;
 
-import Survey.Api.model.webService.*;
+import Survey.Api.controller.processor.GuardarDatosEncuesta;
+import Survey.Api.model.entity.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,13 +20,12 @@ import java.util.List;
 @RequestMapping("/survey")
 public class SurveyRestController {
 
-
+    @Autowired
+    public GuardarDatosEncuesta guardarDatosEncuesta;
 
     @RequestMapping(value = "/new/", method = RequestMethod.POST)
     public ResponseEntity<Resultado> sendSurveys(@RequestBody CuadroEncuesta cuadroEncuesta) {
-        Resultado resultado = new Resultado();
-        resultado.setMensaje(cuadroEncuesta.getServicio());
-        crearArchivoTemporal(cuadroEncuesta);
+        Resultado resultado = guardarDatosEncuesta.guardarDatosAscDescTroncal(cuadroEncuesta);
         return new ResponseEntity<Resultado>(resultado, HttpStatus.OK);
     }
 

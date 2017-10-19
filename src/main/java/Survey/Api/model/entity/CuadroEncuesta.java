@@ -1,19 +1,39 @@
-package Survey.Api.model.webService;
+package Survey.Api.model.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
+@Entity
+@Table(name="ts_cuadro_encuesta")
 public class CuadroEncuesta implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="tsCuadroEncuestaGenerator")
+    @SequenceGenerator(name="tsCuadroEncuestaGenerator", sequenceName = "ts_cuadro_encuesta_id_seq",allocationSize=1)
+    @Column(name = "id")
+    private long id;
+
+    @Column(name = "nombre_encuesta")
     private String nombre_encuesta;
+    @Column(name = "fecha_encuesta")
     private String fecha_encuesta;
+    @Column(name = "dia_semana")
     private String dia_semana;
+    @Column(name = "servicio")
     private String servicio;
+    @Column(name = "num_bus")
     private String num_bus;
+    @Column(name = "recorrido")
     private int recorrido;
+    @Column(name = "num_puerta")
     private int num_puerta;
-    private List<RegistroEncuesta> registros;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cuadroEncuesta", cascade = CascadeType.REMOVE)
+    private List<RegistroEncuestaAscDesc> registros;
+
+
+//    private Set<Usuario> usuariosRecords= new HashSet<Usuario>(0);
 
     public CuadroEncuesta() {
     }
@@ -74,11 +94,19 @@ public class CuadroEncuesta implements Serializable {
         this.num_puerta = num_puerta;
     }
 
-    public List<RegistroEncuesta> getRegistros() {
+    public List<RegistroEncuestaAscDesc> getRegistros() {
         return registros;
     }
 
-    public void setRegistros(List<RegistroEncuesta> registros) {
+    public void setRegistros(List<RegistroEncuestaAscDesc> registros) {
         this.registros = registros;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

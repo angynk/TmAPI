@@ -1,4 +1,4 @@
-package Survey.Api.model.webService;
+package Survey.Api.model.entity;
 
 
 import java.util.List;
