@@ -1,39 +1,63 @@
 package Survey.Api.controller.endpoint;
 
-import Survey.Api.model.webService.Config;
-import Survey.Api.model.webService.Estacion;
-import Survey.Api.model.webService.Resultado;
-import Survey.Api.model.webService.Servicio;
+import Survey.Api.model.webService.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/survey")
 public class SurveyRestController {
 
 
 
     @RequestMapping(value = "/new/", method = RequestMethod.POST)
-    public ResponseEntity<Resultado> sendSurveys() {
+    public ResponseEntity<Resultado> sendSurveys(@RequestBody CuadroEncuesta cuadroEncuesta) {
         Resultado resultado = new Resultado();
-        resultado.setMensaje("Bien");
-        System.out.println("Entre");
+        resultado.setMensaje(cuadroEncuesta.getServicio());
+        crearArchivoTemporal(cuadroEncuesta);
         return new ResponseEntity<Resultado>(resultado, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/newD/", method = RequestMethod.POST)
-    public Resultado senddATA() {
-        Resultado resultado = new Resultado();
-        resultado.setMensaje("Bien");
-        System.out.println("Entre Nuevo");
-        return resultado;
+    private void crearArchivoTemporal(CuadroEncuesta cuadroEncuesta) {
+        File file = new File("C:\\Servicios.txt");
+
+        try {
+            if (file.createNewFile()){
+                System.out.println("File is created!");
+            }else{
+                System.out.println("File already exists.");
+            }
+
+            FileWriter writer = new FileWriter(file);
+            writer.write("Test data \n");
+            writer.write("Servicio: "+cuadroEncuesta.getServicio());
+            writer.write("\n");
+            writer.write("Dia de la Semana: "+cuadroEncuesta.getDia_semana());
+            writer.write("\n");
+            writer.write("Numero Bus: "+cuadroEncuesta.getNum_bus());
+            writer.write("\n");
+            writer.write("Numero Puerta: "+cuadroEncuesta.getNum_puerta());
+            writer.write("\n");
+            writer.write("Numero Registros: "+cuadroEncuesta.getRegistros().size());
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
+
 
     @RequestMapping(value = "/test/", method = RequestMethod.GET)
     public ResponseEntity<List<String>> listAllUsers() {
