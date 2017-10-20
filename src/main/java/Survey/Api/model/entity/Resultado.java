@@ -8,6 +8,7 @@ public class Resultado {
 
     private String mensaje;
     private String status;
+    private int id;
 
     public Resultado() {
     }
@@ -26,5 +27,13 @@ public class Resultado {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

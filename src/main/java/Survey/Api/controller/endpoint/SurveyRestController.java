@@ -24,9 +24,10 @@ public class SurveyRestController {
     public GuardarDatosEncuesta guardarDatosEncuesta;
 
     @RequestMapping(value = "/new/", method = RequestMethod.POST)
-    public ResponseEntity<Resultado> sendSurveys(@RequestBody CuadroEncuesta cuadroEncuesta) {
-        Resultado resultado = guardarDatosEncuesta.guardarDatosAscDescTroncal(cuadroEncuesta);
-        return new ResponseEntity<Resultado>(resultado, HttpStatus.OK);
+    public ResponseEntity<List<Resultado>> sendSurveys(@RequestBody EncuestasTerminadas encuestas) {
+        List<Resultado> resultados = guardarDatosEncuesta.guardarDatosAscDescTroncal(encuestas);
+        System.out.println("Aqui");
+        return new ResponseEntity<List<Resultado>>(resultados, HttpStatus.OK);
     }
 
     private void crearArchivoTemporal(CuadroEncuesta cuadroEncuesta) {
