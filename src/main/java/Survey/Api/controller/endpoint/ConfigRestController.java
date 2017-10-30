@@ -22,7 +22,7 @@ public class ConfigRestController {
 
     @RequestMapping(value = "/servicios/", method = RequestMethod.GET)
     public ResponseEntity<List<Servicio>> getServiciosEstacionesConfiguration() {
-        List<Servicio> servicios = configuracionEncuesta.generarInfoServicios();
+        List<Servicio> servicios = configuracionEncuesta.cargarInfoServicios();
         return new ResponseEntity<List<Servicio>>(servicios, HttpStatus.OK);
     }
 

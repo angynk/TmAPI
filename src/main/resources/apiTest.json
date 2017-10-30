@@ -1,0 +1,33 @@
+{
+	"encuestas":[
+		{
+	"nombre_encuesta":"Test",
+	"dia_semana": "Martes",
+	"servicio": "B11",
+	"num_bus":"Mv-001",
+	"recorrido":1,
+	"num_puerta":2,
+	"fecha_encuesta":"2017-10-15",
+	"registros":[
+		{
+			"estacion":"Ricaurte",
+			"hora_llegada": "11:02:01",
+			"bajan": 12,
+			"suben":5,
+			"quedan":4,
+			"hora_salida": "11:03:00"
+
+		},
+			{
+			"estacion":"Comuneros",
+			"hora_llegada": "11:02:01",
+			"bajan": 2,
+			"suben":3,
+			"quedan":12,
+			"hora_salida": "11:03:00"
+
+		}
+	]
+}
+]
+}
