@@ -57,4 +57,8 @@ public class ServicioEstacionServicio {
     public List<ServicioEstacion> encontrarEstacionesAsociadas(ServicioTs servicioTs) {
         return servicioEstacionDao.encontrarEstacionesAsociadas(servicioTs);
     }
+
+    public List<ServicioEstacion> encontrarTodo() {
+        return servicioEstacionDao.encontrarTodo();
+    }
 }

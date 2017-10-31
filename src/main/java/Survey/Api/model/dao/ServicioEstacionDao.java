@@ -36,4 +36,11 @@ public class ServicioEstacionDao {
         criteria.addOrder(Order.asc("orden"));
         return  criteria.list();
     }
+
+    public List<ServicioEstacion> encontrarTodo() {
+        Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(ServicioEstacion.class);
+        criteria.addOrder(Order.asc("servicio"));
+        criteria.addOrder(Order.asc("orden"));
+        return  criteria.list();
+    }
 }

@@ -19,6 +19,9 @@ public class ServicioTs {
     @Column(name = "identificador")
     private String identificador;
 
+    @Column(name = "tipo")
+    private String tipo;
+
     @Column(name = "sentido")
     private Integer sentido;
 
@@ -66,5 +69,13 @@ public class ServicioTs {
 
     public void setRegistros(List<ServicioEstacion> registros) {
         this.registros = registros;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }
