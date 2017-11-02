@@ -23,7 +23,7 @@ public class ConfiguracionEncuesta {
         for(ServicioTs servicioTs:todosLosServicios) {
             List<String> listaEstaciones = encontrarEstacionesPorServicio(servicioTs);
             if(listaEstaciones.size()>0){
-                servicios.add(new Servicio(servicioTs.getNombre(),listaEstaciones));
+                servicios.add(new Servicio(servicioTs.getNombre(),listaEstaciones,servicioTs.getTipo()));
             }
         }
         return servicios;

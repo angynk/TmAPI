@@ -7,14 +7,16 @@ import java.util.List;
 public class Servicio {
 
     private String nombre;
+    private String tipo;
     private List<String> estaciones;
 
     public Servicio() {
     }
 
-    public Servicio(String nombre, List<String> estaciones) {
+    public Servicio(String nombre, List<String> estaciones,String tipo) {
         this.nombre = nombre;
         this.estaciones = estaciones;
+        this.tipo = tipo;
     }
 
     public String getNombre() {
@@ -31,5 +33,13 @@ public class Servicio {
 
     public void setEstaciones(List<String> estaciones) {
         this.estaciones = estaciones;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }
