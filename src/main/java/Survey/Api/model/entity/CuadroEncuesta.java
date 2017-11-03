@@ -29,6 +29,8 @@ public class CuadroEncuesta implements Serializable {
     private int recorrido;
     @Column(name = "num_puerta")
     private int num_puerta;
+    @Column(name = "aforador")
+    private String aforador;
 
     @Transient
     private int id_realm;
@@ -120,5 +122,13 @@ public class CuadroEncuesta implements Serializable {
 
     public void setId_realm(int id_realm) {
         this.id_realm = id_realm;
+    }
+
+    public String getAforador() {
+        return aforador;
+    }
+
+    public void setAforador(String aforador) {
+        this.aforador = aforador;
     }
 }
