@@ -3,7 +3,7 @@ package Survey.Api.model.entity.json;
 import Survey.Api.model.entity.CuadroEncuesta;
 import Survey.Api.model.entity.db.FOcupacionEncuesta;
 
-import javax.persistence.Transient;
+
 import java.util.Date;
 
 

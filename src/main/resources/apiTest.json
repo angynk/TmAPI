@@ -1,33 +1,71 @@
 {
 	"encuestas":[
 		{
-	"nombre_encuesta":"Test",
-	"dia_semana": "Martes",
-	"servicio": "B11",
-	"num_bus":"Mv-001",
-	"recorrido":1,
-	"num_puerta":2,
-	"fecha_encuesta":"2017-10-15",
-	"registros":[
-		{
-			"estacion":"Ricaurte",
-			"hora_llegada": "11:02:01",
-			"bajan": 12,
-			"suben":5,
-			"quedan":4,
-			"hora_salida": "11:03:00"
+			"nombre_encuesta":"Test",
+			"tipo":1,
+			"fecha_encuesta":"2017-10-15",
+			"aforador":"Doe",
+			"ad_abordo":{
+				"dia_semana": "Martes",
+				"servicio": "B11",
+				"num_bus":"Mv-001",
+				"recorrido":1,
+				"num_puerta":2,
 
-		},
-			{
-			"estacion":"Comuneros",
-			"hora_llegada": "11:02:01",
-			"bajan": 2,
-			"suben":3,
-			"quedan":12,
-			"hora_salida": "11:03:00"
+				"registros":[
+					{
+						"estacion":"Ricaurte",
+						"hora_llegada": "11:02:01",
+						"bajan": 12,
+						"suben":5,
+						"quedan":4,
+						"hora_salida": "11:03:00"
+
+					},
+					{
+						"estacion":"Comuneros",
+						"hora_llegada": "11:02:01",
+						"bajan": 2,
+						"suben":3,
+						"quedan":12,
+						"hora_salida": "11:03:00"
+
+					}
+				]
+			}
 
 		}
 	]
 }
-]
-}
+
+//{
+//	"encuestas":[
+//		{
+//			"nombre_encuesta":"Test",
+//			"tipo":2,
+//			"fecha_encuesta":"2017-10-15",
+//			"aforador":"Doe",
+//			"fr_ocupacion":{
+//				"zona": "NQS SUR",
+//				"estacion": "Sena",
+//				"sentido":"NORTE-SUR",
+//
+//				"registros":[
+//					{
+//						"ocupacion":120,
+//						"hora_paso": "11:02:01",
+//						"codigo": 12
+//
+//					},
+//					{
+//						"ocupacion":150,
+//						"hora_paso": "11:05:01",
+//						"codigo": 15
+//
+//					}
+//				]
+//			}
+//
+//		}
+//	]
+//}

@@ -10,7 +10,7 @@ public class RegistroEncuestaFOcupacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="tsRegFOcupacionGenerator")
-    @SequenceGenerator(name="tsFOcupacionGenerator", sequenceName = "ts_registro_focupacion_id_seq",allocationSize=1)
+    @SequenceGenerator(name="tsRegFOcupacionGenerator", sequenceName = "ts_registro_focupacion_id_seq",allocationSize=1)
     @Column(name = "id")
     private long id;
 
