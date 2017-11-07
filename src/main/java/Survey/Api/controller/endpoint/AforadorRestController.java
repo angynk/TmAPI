@@ -1,8 +1,6 @@
 package Survey.Api.controller.endpoint;
 
 import Survey.Api.controller.services.LoginServicio;
-import Survey.Api.model.entity.EncuestasTerminadas;
-import Survey.Api.model.entity.Resultado;
 import Survey.Api.model.entity.db.Aforador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -2,6 +2,7 @@ package Survey.Api.controller.endpoint;
 
 import Survey.Api.controller.processor.GuardarDatosEncuesta;
 import Survey.Api.model.entity.*;
+import Survey.Api.model.entity.json.EncuestasTerminadas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

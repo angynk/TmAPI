@@ -2,9 +2,11 @@ package Survey.Api.controller.processor;
 
 import Survey.Api.controller.services.EncuestaAscDescServicio;
 import Survey.Api.model.entity.CuadroEncuesta;
-import Survey.Api.model.entity.EncuestasTerminadas;
+import Survey.Api.model.entity.json.EncuestaTM;
+import Survey.Api.model.entity.json.EncuestasTerminadas;
 import Survey.Api.model.entity.RegistroEncuestaAscDesc;
 import Survey.Api.model.entity.Resultado;
+import Survey.Api.model.entity.json.TipoEncuesta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,16 +21,27 @@ public class GuardarDatosEncuesta {
 
     public List<Resultado> guardarDatosAscDescTroncal(EncuestasTerminadas encuestas){
         List<Resultado> resultados = new ArrayList<>();
-        for(CuadroEncuesta cuadroEncuesta:encuestas.getEncuestas()){
-            resultados.add(guardarEncuesta(cuadroEncuesta));
+        for(EncuestaTM encuestaTM:encuestas.getEncuestas()){
+            Resultado resultado = new Resultado();
+            if (encuestaTM.getTipo().equals(TipoEncuesta.ENC_AD_ABORDO)){
+               resultado = guardarEncuestaAscDescAbordo(encuestaTM.getAd_abordo(),encuestaTM);
+            }else if (encuestaTM.getTipo().equals(TipoEncuesta.ENC_FR_OCUPACION)){
+
+            }
+
+            resultados.add(resultado);
+
         }
 
         return resultados;
     }
 
-    public Resultado guardarEncuesta(CuadroEncuesta cuadroEncuesta){
+    public Resultado guardarEncuestaAscDescAbordo(CuadroEncuesta cuadroEncuesta, EncuestaTM encuestaTM){
         Resultado resultado = new Resultado();
         try{
+            cuadroEncuesta.setFecha_encuesta(encuestaTM.getFecha_encuesta());
+            cuadroEncuesta.setNombre_encuesta(encuestaTM.getNombre_encuesta());
+            cuadroEncuesta.setAforador(encuestaTM.getAforador());
             encuestaAscDescServicio.addCuadroEncuesta(cuadroEncuesta);
             List<RegistroEncuestaAscDesc> registros = cuadroEncuesta.getRegistros();
             for(RegistroEncuestaAscDesc registro:registros){
