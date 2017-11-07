@@ -3,6 +3,7 @@ package Survey.Api.model.entity.json;
 import Survey.Api.model.entity.CuadroEncuesta;
 import Survey.Api.model.entity.db.FOcupacionEncuesta;
 
+import javax.persistence.Transient;
 import java.util.Date;
 
 
@@ -14,6 +15,7 @@ public class EncuestaTM {
     private String aforador;
     private String identificador;
     private Date fecha_encuesta;
+    private int id_realm;
 
     //Datos por encuesta
     private CuadroEncuesta ad_abordo; // ASCENSOS Y DESCENSOS TRONCAL ABORDO
@@ -76,5 +78,13 @@ public class EncuestaTM {
 
     public void setFr_ocupacion(FOcupacionEncuesta fr_ocupacion) {
         this.fr_ocupacion = fr_ocupacion;
+    }
+
+    public int getId_realm() {
+        return id_realm;
+    }
+
+    public void setId_realm(int id_realm) {
+        this.id_realm = id_realm;
     }
 }

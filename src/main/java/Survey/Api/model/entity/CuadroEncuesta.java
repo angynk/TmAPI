@@ -32,8 +32,6 @@ public class CuadroEncuesta implements Serializable {
     @Column(name = "aforador")
     private String aforador;
 
-    @Transient
-    private int id_realm;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cuadroEncuesta", cascade = CascadeType.REMOVE)
     private List<RegistroEncuestaAscDesc> registros;
@@ -116,13 +114,7 @@ public class CuadroEncuesta implements Serializable {
         this.id = id;
     }
 
-    public int getId_realm() {
-        return id_realm;
-    }
 
-    public void setId_realm(int id_realm) {
-        this.id_realm = id_realm;
-    }
 
     public String getAforador() {
         return aforador;
