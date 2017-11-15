@@ -1,6 +1,5 @@
 package Survey.Api.model.entity.json;
 
-import Survey.Api.model.entity.CuadroEncuesta;
 
 import java.util.List;
 

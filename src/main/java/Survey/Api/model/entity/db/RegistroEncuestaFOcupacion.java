@@ -21,7 +21,7 @@ public class RegistroEncuestaFOcupacion {
     private Integer ocupacion;
 
     @Column(name = "codigo")
-    private Integer codigo;
+    private String codigo;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "info_base", nullable = false)
@@ -55,11 +55,11 @@ public class RegistroEncuestaFOcupacion {
         this.ocupacion = ocupacion;
     }
 
-    public Integer getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(Integer codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
