@@ -1,6 +1,7 @@
 package Survey.Api.model.entity.json;
 
 import Survey.Api.model.entity.CuadroEncuesta;
+import Survey.Api.model.entity.db.ADPuntoEncuesta;
 import Survey.Api.model.entity.db.FOcupacionEncuesta;
 
 
@@ -20,6 +21,7 @@ public class EncuestaTM {
     //Datos por encuesta
     private CuadroEncuesta ad_abordo; // ASCENSOS Y DESCENSOS TRONCAL ABORDO
     private FOcupacionEncuesta fr_ocupacion; // FRECUENCIA OCUPACIÓN
+    private ADPuntoEncuesta ad_fijo; // FRECUENCIA OCUPACIÓN
 
     public EncuestaTM() {
     }
@@ -86,5 +88,13 @@ public class EncuestaTM {
 
     public void setId_realm(int id_realm) {
         this.id_realm = id_realm;
+    }
+
+    public ADPuntoEncuesta getAd_fijo() {
+        return ad_fijo;
+    }
+
+    public void setAd_fijo(ADPuntoEncuesta ad_fijo) {
+        this.ad_fijo = ad_fijo;
     }
 }

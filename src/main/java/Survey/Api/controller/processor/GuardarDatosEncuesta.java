@@ -1,9 +1,12 @@
 package Survey.Api.controller.processor;
 
+import Survey.Api.controller.services.EncuestaAscDescPuntoServicio;
 import Survey.Api.controller.services.EncuestaAscDescServicio;
 import Survey.Api.controller.services.EncuestaFOcupacionServicio;
 import Survey.Api.model.entity.CuadroEncuesta;
+import Survey.Api.model.entity.db.ADPuntoEncuesta;
 import Survey.Api.model.entity.db.FOcupacionEncuesta;
+import Survey.Api.model.entity.db.RegistroEncuestaADPunto;
 import Survey.Api.model.entity.db.RegistroEncuestaFOcupacion;
 import Survey.Api.model.entity.json.EncuestaTM;
 import Survey.Api.model.entity.json.EncuestasTerminadas;
@@ -26,6 +29,9 @@ public class GuardarDatosEncuesta {
     @Autowired
     EncuestaFOcupacionServicio encuestaFOcupacionServicio;
 
+    @Autowired
+    EncuestaAscDescPuntoServicio encuestaAscDescPuntoServicio;
+
     public List<Resultado> guardarDatosAscDescTroncal(EncuestasTerminadas encuestas){
         List<Resultado> resultados = new ArrayList<>();
         for(EncuestaTM encuestaTM:encuestas.getEncuestas()){
@@ -34,6 +40,8 @@ public class GuardarDatosEncuesta {
                resultado = guardarEncuestaAscDescAbordo(encuestaTM.getAd_abordo(),encuestaTM);
             }else if (encuestaTM.getTipo().equals(TipoEncuesta.ENC_FR_OCUPACION)){
                 resultado = guardarEncuestaFOcupacion(encuestaTM.getFr_ocupacion(),encuestaTM);
+            }else if (encuestaTM.getTipo().equals(TipoEncuesta.ENC_AD_PUNTO)){
+                resultado = guardarEncuestaAscDesPunto(encuestaTM.getAd_fijo(),encuestaTM);
             }
 
             resultados.add(resultado);
@@ -41,6 +49,25 @@ public class GuardarDatosEncuesta {
         }
 
         return resultados;
+    }
+
+    private Resultado guardarEncuestaAscDesPunto(ADPuntoEncuesta ad_fijo, EncuestaTM encuestaTM) {
+        Resultado resultado = new Resultado();
+        try{
+            ad_fijo.setFecha_encuesta(encuestaTM.getFecha_encuesta());
+            ad_fijo.setAforador(encuestaTM.getAforador());
+            encuestaAscDescPuntoServicio.addADPuntoEncuesta(ad_fijo);
+            List<RegistroEncuestaADPunto> registros = ad_fijo.getRegistros();
+            for(RegistroEncuestaADPunto registro:registros){
+                registro.setAdPuntoEncuesta(ad_fijo);
+                encuestaAscDescPuntoServicio.addADRegPuntoEncuesta(registro);
+            }
+            resultado = retornarResultadoPositivo(encuestaTM);
+
+        }catch(Exception e){
+            retornarResultadoNegativo(e);
+        }
+        return resultado;
     }
 
     private Resultado guardarEncuestaFOcupacion(FOcupacionEncuesta fr_ocupacion, EncuestaTM encuestaTM) {
