@@ -93,10 +93,15 @@ public class GuardarDatosEncuesta {
         Resultado resultado = new Resultado();
         try{
             cuadroEncuesta.setFecha_encuesta(encuestaTM.getFecha_encuesta());
+            cuadroEncuesta.setDia_semana(EncuestaUtil.obtenerDiaDeLaSemana(encuestaTM.getFecha_encuesta()));
             cuadroEncuesta.setNombre_encuesta(encuestaTM.getNombre_encuesta());
             cuadroEncuesta.setAforador(encuestaTM.getAforador());
-            encuestaAscDescServicio.addCuadroEncuesta(cuadroEncuesta);
             List<RegistroEncuestaAscDesc> registros = cuadroEncuesta.getRegistros();
+            if(registros.size()>0){
+                cuadroEncuesta.setHoraInicio(EncuestaUtil.getTimeFromString(registros.get(0).getHora_llegada()));
+            }
+            encuestaAscDescServicio.addCuadroEncuesta(cuadroEncuesta);
+
             for(RegistroEncuestaAscDesc registro:registros){
                 registro.setCuadroEncuesta(cuadroEncuesta);
                 encuestaAscDescServicio.addRegistroEncuestaAscDesc(registro);

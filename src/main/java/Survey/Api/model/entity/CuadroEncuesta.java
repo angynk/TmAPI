@@ -2,6 +2,7 @@ package Survey.Api.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +32,9 @@ public class CuadroEncuesta implements Serializable {
     private int num_puerta;
     @Column(name = "aforador")
     private String aforador;
+
+    @Column(name = "hora_inicio")
+    private Time horaInicio;
 
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cuadroEncuesta", cascade = CascadeType.REMOVE)
@@ -122,5 +126,13 @@ public class CuadroEncuesta implements Serializable {
 
     public void setAforador(String aforador) {
         this.aforador = aforador;
+    }
+
+    public Time getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(Time horaInicio) {
+        this.horaInicio = horaInicio;
     }
 }
