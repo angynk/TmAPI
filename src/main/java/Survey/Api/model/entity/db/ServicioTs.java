@@ -22,8 +22,6 @@ public class ServicioTs {
     @Column(name = "tipo")
     private String tipo;
 
-    @Column(name = "sentido")
-    private Integer sentido;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "servicio", cascade = CascadeType.REMOVE)
     private List<ServicioEstacion> registros;
@@ -53,14 +51,6 @@ public class ServicioTs {
 
     public void setIdentificador(String identificador) {
         this.identificador = identificador;
-    }
-
-    public Integer getSentido() {
-        return sentido;
-    }
-
-    public void setSentido(Integer sentido) {
-        this.sentido = sentido;
     }
 
     public List<ServicioEstacion> getRegistros() {

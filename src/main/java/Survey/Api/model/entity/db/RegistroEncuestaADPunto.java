@@ -22,6 +22,10 @@ public class RegistroEncuestaADPunto {
     private int pas_bajan;
     @Column(name = "pas_suben")
     private int pas_suben;
+    @Column(name = "pas_quedan")
+    private int pas_quedan;
+    @Column(name = "observacion")
+    private String observacion;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ad_punto", nullable = false)
@@ -84,5 +88,21 @@ public class RegistroEncuestaADPunto {
 
     public void setAdPuntoEncuesta(ADPuntoEncuesta adPuntoEncuesta) {
         this.adPuntoEncuesta = adPuntoEncuesta;
+    }
+
+    public int getPas_quedan() {
+        return pas_quedan;
+    }
+
+    public void setPas_quedan(int pas_quedan) {
+        this.pas_quedan = pas_quedan;
+    }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
     }
 }
