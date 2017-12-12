@@ -2,6 +2,7 @@ package Survey.Api.model.entity.json;
 
 import Survey.Api.model.entity.CuadroEncuesta;
 import Survey.Api.model.entity.db.ADPuntoEncuesta;
+import Survey.Api.model.entity.db.CoDespachosEncuesta;
 import Survey.Api.model.entity.db.FOcupacionEncuesta;
 
 
@@ -22,6 +23,7 @@ public class EncuestaTM {
     private CuadroEncuesta ad_abordo; // ASCENSOS Y DESCENSOS TRONCAL ABORDO
     private FOcupacionEncuesta fr_ocupacion; // FRECUENCIA OCUPACIÓN
     private ADPuntoEncuesta ad_fijo; // FRECUENCIA OCUPACIÓN
+    private CoDespachosEncuesta co_despacho; // CONTEO DESPACHOS
 
     public EncuestaTM() {
     }
@@ -96,5 +98,13 @@ public class EncuestaTM {
 
     public void setAd_fijo(ADPuntoEncuesta ad_fijo) {
         this.ad_fijo = ad_fijo;
+    }
+
+    public CoDespachosEncuesta getCo_despacho() {
+        return co_despacho;
+    }
+
+    public void setCo_despacho(CoDespachosEncuesta co_despacho) {
+        this.co_despacho = co_despacho;
     }
 }
