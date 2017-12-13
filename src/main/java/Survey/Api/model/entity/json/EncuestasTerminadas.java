@@ -1,10 +1,11 @@
 package Survey.Api.model.entity.json;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 
-public class EncuestasTerminadas {
+public class EncuestasTerminadas implements Serializable{
 
     private List<EncuestaTM> encuestas;
 

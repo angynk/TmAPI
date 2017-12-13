@@ -6,10 +6,11 @@ import Survey.Api.model.entity.db.CoDespachosEncuesta;
 import Survey.Api.model.entity.db.FOcupacionEncuesta;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class EncuestaTM {
+public class EncuestaTM implements Serializable{
 
     // Datos Básicos
     private Integer tipo;

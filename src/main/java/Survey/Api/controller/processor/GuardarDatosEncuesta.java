@@ -33,6 +33,19 @@ public class GuardarDatosEncuesta {
     @Autowired
     ConteoDespachosServicio conteoDespachosServicio;
 
+    public boolean guardarDatosEncuesta(EncuestaTM encuestaTM){
+        if (encuestaTM.getTipo().equals(TipoEncuesta.ENC_AD_ABORDO)){
+            guardarEncuestaAscDescAbordo(encuestaTM.getAd_abordo(),encuestaTM);
+        }else if (encuestaTM.getTipo().equals(TipoEncuesta.ENC_FR_OCUPACION)){
+            guardarEncuestaFOcupacion(encuestaTM.getFr_ocupacion(),encuestaTM);
+        }else if (encuestaTM.getTipo().equals(TipoEncuesta.ENC_AD_PUNTO)){
+            guardarEncuestaAscDesPunto(encuestaTM.getAd_fijo(),encuestaTM);
+        }else if (encuestaTM.getTipo().equals(TipoEncuesta.ENC_CONT_DESPACHOS)){
+            guardarEncuestasConteoDespachos(encuestaTM.getCo_despacho(),encuestaTM);
+        }
+        return true;
+    }
+
     public List<Resultado> guardarDatosAscDescTroncal(EncuestasTerminadas encuestas){
         List<Resultado> resultados = new ArrayList<>();
         for(EncuestaTM encuestaTM:encuestas.getEncuestas()){

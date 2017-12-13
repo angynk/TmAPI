@@ -1,6 +1,7 @@
 package Survey.Api.controller.endpoint;
 
 import Survey.Api.controller.processor.GuardarDatosEncuesta;
+import Survey.Api.controller.processor.QueueEncuesta;
 import Survey.Api.model.entity.*;
 import Survey.Api.model.entity.json.EncuestasTerminadas;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,14 @@ public class SurveyRestController {
     @Autowired
     public GuardarDatosEncuesta guardarDatosEncuesta;
 
+    @Autowired
+    public QueueEncuesta queueEncuesta;
+
     @RequestMapping(value = "/new/", method = RequestMethod.POST)
     public ResponseEntity<List<Resultado>> sendSurveys(@RequestBody EncuestasTerminadas encuestas) {
-        List<Resultado> resultados = guardarDatosEncuesta.guardarDatosAscDescTroncal(encuestas);
-        System.out.println("Aqui");
+//        List<Resultado> resultados = guardarDatosEncuesta.guardarDatosAscDescTroncal(encuestas);
+//        System.out.println("Aqui");
+          List<Resultado> resultados = queueEncuesta.sendEncuesta(encuestas);
         return new ResponseEntity<List<Resultado>>(resultados, HttpStatus.OK);
     }
 

@@ -1,10 +1,11 @@
 package Survey.Api.model.entity.db;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="ts_registro_ascdes_punto")
-public class RegistroEncuestaADPunto {
+public class RegistroEncuestaADPunto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="tsADPuntoRegGenerator")

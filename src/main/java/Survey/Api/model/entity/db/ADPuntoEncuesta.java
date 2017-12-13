@@ -1,13 +1,14 @@
 package Survey.Api.model.entity.db;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name="ts_adpunto_encuesta")
-public class ADPuntoEncuesta {
+public class ADPuntoEncuesta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="tsADPuntoGenerator")

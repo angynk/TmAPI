@@ -3,10 +3,11 @@ package Survey.Api.model.entity.db;
 import Survey.Api.model.entity.CuadroEncuesta;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="ts_registro_focupacion")
-public class RegistroEncuestaFOcupacion {
+public class RegistroEncuestaFOcupacion implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="tsRegFOcupacionGenerator")
