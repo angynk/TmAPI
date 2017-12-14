@@ -1,6 +1,7 @@
 package Survey.Api.controller.endpoint;
 
 import Survey.Api.controller.processor.ConfiguracionEncuesta;
+import Survey.Api.model.entity.Config;
 import Survey.Api.model.entity.Servicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,12 @@ public class ConfigRestController {
     public ResponseEntity<List<Servicio>> getServiciosEstacionesConfiguration() {
         List<Servicio> servicios = configuracionEncuesta.cargarInfoServicios();
         return new ResponseEntity<List<Servicio>>(servicios, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/serviciosEstaciones/", method = RequestMethod.GET)
+    public ResponseEntity<Config> getServiciosEstaciones() {
+        Config config = configuracionEncuesta.cargarTodosLosDatos();
+        return new ResponseEntity<Config>(config, HttpStatus.OK);
     }
 
 }

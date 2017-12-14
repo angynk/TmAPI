@@ -3,6 +3,7 @@ package Survey.Api.controller.services;
 import Survey.Api.model.dao.EstacionDao;
 import Survey.Api.model.dao.ServicioDao;
 import Survey.Api.model.dao.ServicioEstacionDao;
+import Survey.Api.model.entity.db.Estacion;
 import Survey.Api.model.entity.db.ServicioEstacion;
 import Survey.Api.model.entity.db.ServicioTs;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +61,13 @@ public class ServicioEstacionServicio {
 
     public List<ServicioEstacion> encontrarTodo() {
         return servicioEstacionDao.encontrarTodo();
+    }
+
+    public List<Estacion> encontrarTodasLasEstaciones() {
+        return estacionDao.encontrarTodo();
+    }
+
+    public List<ServicioEstacion> encontrarServiciosAsociadas(Estacion estacion) {
+        return servicioEstacionDao.encontrarServiciosAsociadas(estacion);
     }
 }

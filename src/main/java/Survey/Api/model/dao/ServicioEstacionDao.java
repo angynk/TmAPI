@@ -1,5 +1,6 @@
 package Survey.Api.model.dao;
 
+import Survey.Api.model.entity.db.Estacion;
 import Survey.Api.model.entity.db.ServicioEstacion;
 import Survey.Api.model.entity.db.ServicioTs;
 import com.sun.org.apache.xpath.internal.operations.Or;
@@ -40,6 +41,13 @@ public class ServicioEstacionDao {
     public List<ServicioEstacion> encontrarTodo() {
         Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(ServicioEstacion.class);
         criteria.addOrder(Order.asc("servicio"));
+        criteria.addOrder(Order.asc("orden"));
+        return  criteria.list();
+    }
+
+    public List<ServicioEstacion> encontrarServiciosAsociadas(Estacion estacion) {
+        Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(ServicioEstacion.class);
+        criteria.add(Restrictions.eq("estacion", estacion));
         criteria.addOrder(Order.asc("orden"));
         return  criteria.list();
     }
