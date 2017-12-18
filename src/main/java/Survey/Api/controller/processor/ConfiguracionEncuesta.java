@@ -19,6 +19,9 @@ public class ConfiguracionEncuesta {
     @Autowired
     private ServicioEstacionServicio servicioEstacionServicio;
 
+
+    private Config  config ;
+
     public List<Servicio> cargarInfoServicios(){
         List<Servicio> servicios = new ArrayList<>();
         List<ServicioTs> todosLosServicios = servicioEstacionServicio.encontrarTodosLosServicios();
@@ -64,12 +67,20 @@ public class ConfiguracionEncuesta {
 
     public Config cargarTodosLosDatos() {
 
-        Config config = new Config();
+        config = new Config();
         List<Servicio> servicios = cargarInfoServicios();
         List<EstacionTs> estaaciones = cargarServicios();
         config.setEstacionTs(estaaciones);
         config.setServicios(servicios);
 
         return config;
+    }
+
+    public Config getConfig() {
+        return config;
+    }
+
+    public void setConfig(Config config) {
+        this.config = config;
     }
 }

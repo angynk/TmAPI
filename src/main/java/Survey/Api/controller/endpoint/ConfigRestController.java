@@ -27,7 +27,7 @@ public class ConfigRestController {
 
     @RequestMapping(value = "/serviciosEstaciones/", method = RequestMethod.GET)
     public ResponseEntity<Config> getServiciosEstaciones() {
-        Config config = configuracionEncuesta.cargarTodosLosDatos();
+        Config config = configuracionEncuesta.getConfig();
         return new ResponseEntity<Config>(config, HttpStatus.OK);
     }
 
