@@ -31,4 +31,10 @@ public class ConfigRestController {
         return new ResponseEntity<Config>(config, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/updateServicios/", method = RequestMethod.GET)
+    public ResponseEntity<Boolean> updateServiciosEstaciones() {
+        configuracionEncuesta.updateServicios();
+        return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+    }
+
 }

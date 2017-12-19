@@ -10,6 +10,7 @@ import Survey.Api.model.entity.db.ServicioTs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,13 @@ public class ConfiguracionEncuesta {
 
     @Autowired
     private ServicioEstacionServicio servicioEstacionServicio;
+
+
+
+    @PostConstruct
+    public void init(){
+        cargarTodosLosDatos();
+    }
 
 
     private Config  config ;
@@ -82,5 +90,10 @@ public class ConfiguracionEncuesta {
 
     public void setConfig(Config config) {
         this.config = config;
+    }
+
+    public void updateServicios() {
+//        serviciosSender.sendMessage("Actualizar");
+        cargarTodosLosDatos();
     }
 }
