@@ -21,8 +21,7 @@ public class CoDespachosEncuesta implements Serializable {
     private Date fecha_encuesta;
     @Column(name = "dia_semana")
     private String dia_semana;
-    @Column(name = "servicio")
-    private String servicio;
+
     @Column(name = "estacion")
     private String estacion;
     @Column(name = "aforador")
@@ -56,14 +55,6 @@ public class CoDespachosEncuesta implements Serializable {
 
     public void setDia_semana(String dia_semana) {
         this.dia_semana = dia_semana;
-    }
-
-    public String getServicio() {
-        return servicio;
-    }
-
-    public void setServicio(String servicio) {
-        this.servicio = servicio;
     }
 
     public String getEstacion() {

@@ -27,8 +27,6 @@ public class SurveyRestController {
 
     @RequestMapping(value = "/new/", method = RequestMethod.POST)
     public ResponseEntity<List<Resultado>> sendSurveys(@RequestBody EncuestasTerminadas encuestas) {
-//        List<Resultado> resultados = guardarDatosEncuesta.guardarDatosAscDescTroncal(encuestas);
-//        System.out.println("Aqui");
           List<Resultado> resultados = queueEncuesta.sendEncuesta(encuestas);
         return new ResponseEntity<List<Resultado>>(resultados, HttpStatus.OK);
     }

@@ -21,6 +21,9 @@ public class RegistroConteoDespacho implements Serializable {
     @Column(name = "hora_despacho")
     private String hora_despacho;
 
+    @Column(name = "servicio")
+    private String servicio;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "conteo_despacho", nullable = false)
     private CoDespachosEncuesta conteoDespacho;
@@ -60,5 +63,13 @@ public class RegistroConteoDespacho implements Serializable {
 
     public void setConteoDespacho(CoDespachosEncuesta conteoDespacho) {
         this.conteoDespacho = conteoDespacho;
+    }
+
+    public String getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(String servicio) {
+        this.servicio = servicio;
     }
 }

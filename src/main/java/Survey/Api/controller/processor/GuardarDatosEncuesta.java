@@ -13,6 +13,7 @@ import Survey.Api.model.entity.Resultado;
 import Survey.Api.model.entity.json.TipoEncuesta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.apache.log4j.Logger;
 
 import javax.xml.transform.Result;
 import java.util.ArrayList;
@@ -33,7 +34,10 @@ public class GuardarDatosEncuesta {
     @Autowired
     ConteoDespachosServicio conteoDespachosServicio;
 
+    private static Logger log = Logger.getLogger(QueueEncuesta.class);
+
     public boolean guardarDatosEncuesta(EncuestaTM encuestaTM){
+        log.info("Guardando datos encuesta "+encuestaTM.getTipo()+" de "+encuestaTM.getAforador());
         if (encuestaTM.getTipo().equals(TipoEncuesta.ENC_AD_ABORDO)){
             guardarEncuestaAscDescAbordo(encuestaTM.getAd_abordo(),encuestaTM);
         }else if (encuestaTM.getTipo().equals(TipoEncuesta.ENC_FR_OCUPACION)){
@@ -81,7 +85,8 @@ public class GuardarDatosEncuesta {
             resultado = retornarResultadoPositivo(encuestaTM);
 
         }catch(Exception e){
-            retornarResultadoNegativo(e);
+            retornarResultadoNegativo(e,encuestaTM);
+
         }
         return resultado;
     }
@@ -100,7 +105,7 @@ public class GuardarDatosEncuesta {
             resultado = retornarResultadoPositivo(encuestaTM);
 
         }catch(Exception e){
-            retornarResultadoNegativo(e);
+            retornarResultadoNegativo(e,encuestaTM);
         }
         return resultado;
     }
@@ -119,7 +124,7 @@ public class GuardarDatosEncuesta {
             }
             resultado = retornarResultadoPositivo(encuestaTM);
         }catch (Exception e){
-            retornarResultadoNegativo(e);
+            retornarResultadoNegativo(e,encuestaTM);
         }
         return resultado;
     }
@@ -144,7 +149,7 @@ public class GuardarDatosEncuesta {
            resultado = retornarResultadoPositivo(encuestaTM);
 
         }catch(Exception e){
-            retornarResultadoNegativo(e);
+            retornarResultadoNegativo(e,encuestaTM);
         }
         return resultado;
     }
@@ -157,11 +162,12 @@ public class GuardarDatosEncuesta {
         return resultado;
     }
 
-    private Resultado retornarResultadoNegativo(Exception e){
+    private Resultado retornarResultadoNegativo(Exception e,EncuestaTM encuestaTM){
         Resultado resultado = new Resultado();
         resultado.setMensaje(e.getMessage());
         resultado.setStatus(Responses.response_error);
         resultado.setId(-1);
+        log.info("No se pudo guardar la encuesta "+encuestaTM.getTipo()+" de "+encuestaTM.getAforador());
         return resultado;
     }
 }
