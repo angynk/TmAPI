@@ -33,6 +33,9 @@ public class FOcupacionEncuesta implements Serializable {
     @Column(name = "sentido")
     private String sentido;
 
+    @Column(name = "dia_semana")
+    private String dia_semana;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "fOcupacionEncuesta", cascade = CascadeType.REMOVE)
     private List<RegistroEncuestaFOcupacion> registros;
 
@@ -93,5 +96,13 @@ public class FOcupacionEncuesta implements Serializable {
 
     public void setRegistros(List<RegistroEncuestaFOcupacion> registros) {
         this.registros = registros;
+    }
+
+    public String getDia_semana() {
+        return dia_semana;
+    }
+
+    public void setDia_semana(String dia_semana) {
+        this.dia_semana = dia_semana;
     }
 }

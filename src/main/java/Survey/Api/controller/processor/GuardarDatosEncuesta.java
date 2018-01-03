@@ -76,6 +76,7 @@ public class GuardarDatosEncuesta {
         try{
             co_despacho.setFecha_encuesta(encuestaTM.getFecha_encuesta());
             co_despacho.setAforador(encuestaTM.getAforador());
+            co_despacho.setDia_semana(encuestaTM.getDia_semana());
             conteoDespachosServicio.addConteoDespachos(co_despacho);
             List<RegistroConteoDespacho> registros = co_despacho.getRegistros();
             for(RegistroConteoDespacho registro:registros){
@@ -116,6 +117,7 @@ public class GuardarDatosEncuesta {
         try{
             fr_ocupacion.setFecha_encuesta(encuestaTM.getFecha_encuesta());
             fr_ocupacion.setAforador(encuestaTM.getAforador());
+            fr_ocupacion.setDia_semana(encuestaTM.getDia_semana());
             encuestaFOcupacionServicio.addFOcupacionEncuesta(fr_ocupacion);
             List<RegistroEncuestaFOcupacion> registros = fr_ocupacion.getRegistros();
             for(RegistroEncuestaFOcupacion registro: registros){

@@ -17,6 +17,7 @@ public class EncuestaTM implements Serializable{
     private String nombre_encuesta;
     private String aforador;
     private String identificador;
+    private String dia_semana;
     private Date fecha_encuesta;
     private int id_realm;
 
@@ -107,5 +108,13 @@ public class EncuestaTM implements Serializable{
 
     public void setCo_despacho(CoDespachosEncuesta co_despacho) {
         this.co_despacho = co_despacho;
+    }
+
+    public String getDia_semana() {
+        return dia_semana;
+    }
+
+    public void setDia_semana(String dia_semana) {
+        this.dia_semana = dia_semana;
     }
 }
