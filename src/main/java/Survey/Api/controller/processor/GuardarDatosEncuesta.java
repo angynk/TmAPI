@@ -1,9 +1,6 @@
 package Survey.Api.controller.processor;
 
-import Survey.Api.controller.services.ConteoDespachosServicio;
-import Survey.Api.controller.services.EncuestaAscDescPuntoServicio;
-import Survey.Api.controller.services.EncuestaAscDescServicio;
-import Survey.Api.controller.services.EncuestaFOcupacionServicio;
+import Survey.Api.controller.services.*;
 import Survey.Api.model.entity.CuadroEncuesta;
 import Survey.Api.model.entity.db.*;
 import Survey.Api.model.entity.json.EncuestaTM;
@@ -34,6 +31,9 @@ public class GuardarDatosEncuesta {
     @Autowired
     ConteoDespachosServicio conteoDespachosServicio;
 
+    @Autowired
+    ODencuestaServicio oDencuestaServicio;
+
     private static Logger log = Logger.getLogger(QueueEncuesta.class);
 
     public boolean guardarDatosEncuesta(EncuestaTM encuestaTM){
@@ -46,8 +46,27 @@ public class GuardarDatosEncuesta {
             guardarEncuestaAscDesPunto(encuestaTM.getAd_fijo(),encuestaTM);
         }else if (encuestaTM.getTipo().equals(TipoEncuesta.ENC_CONT_DESPACHOS)){
             guardarEncuestasConteoDespachos(encuestaTM.getCo_despacho(),encuestaTM);
+        }else if ( encuestaTM.getTipo().equals(TipoEncuesta.ENC_ORIGEN_DESTINO)){
+            guardarEncuestasOrigenDestino(encuestaTM.getOd_encuesta(),encuestaTM);
         }
         return true;
+    }
+
+    private void guardarEncuestasOrigenDestino(ODEncuesta od_encuesta, EncuestaTM encuestaTM) {
+        od_encuesta.setFecha_encuesta(encuestaTM.getFecha_encuesta());
+        od_encuesta.setDia_semana(encuestaTM.getDia_semana());
+        od_encuesta.setAforador(encuestaTM.getAforador());
+        oDencuestaServicio.addODEncuesta(od_encuesta);
+        List<ODRegistro> registros = od_encuesta.getRegistros();
+        for(ODRegistro odRegistro: registros){
+            odRegistro.setIdEncuesta(od_encuesta);
+            oDencuestaServicio.addODRegistro(odRegistro);
+            List<ODTransbordo> transbordos = odRegistro.getTransbordos();
+            for(ODTransbordo transbordo:transbordos){
+                transbordo.setOdRegistro(odRegistro);
+                oDencuestaServicio.addODTransbordo(transbordo);
+            }
+        }
     }
 
     public List<Resultado> guardarDatosAscDescTroncal(EncuestasTerminadas encuestas){

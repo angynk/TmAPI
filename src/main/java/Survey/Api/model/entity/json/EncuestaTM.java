@@ -4,6 +4,7 @@ import Survey.Api.model.entity.CuadroEncuesta;
 import Survey.Api.model.entity.db.ADPuntoEncuesta;
 import Survey.Api.model.entity.db.CoDespachosEncuesta;
 import Survey.Api.model.entity.db.FOcupacionEncuesta;
+import Survey.Api.model.entity.db.ODEncuesta;
 
 
 import java.io.Serializable;
@@ -26,6 +27,7 @@ public class EncuestaTM implements Serializable{
     private FOcupacionEncuesta fr_ocupacion; // FRECUENCIA OCUPACIÓN
     private ADPuntoEncuesta ad_fijo; // FRECUENCIA OCUPACIÓN
     private CoDespachosEncuesta co_despacho; // CONTEO DESPACHOS
+    private ODEncuesta od_encuesta; // ORIGEN DESTINO
 
     public EncuestaTM() {
     }
@@ -116,5 +118,13 @@ public class EncuestaTM implements Serializable{
 
     public void setDia_semana(String dia_semana) {
         this.dia_semana = dia_semana;
+    }
+
+    public ODEncuesta getOd_encuesta() {
+        return od_encuesta;
+    }
+
+    public void setOd_encuesta(ODEncuesta od_encuesta) {
+        this.od_encuesta = od_encuesta;
     }
 }
