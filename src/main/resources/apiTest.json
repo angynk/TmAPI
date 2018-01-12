@@ -69,3 +69,37 @@
 //		}
 //	]
 //}
+
+//OD ENCUEESTA
+//{
+//	"encuestas":[
+//		{
+//			"tipo":5,
+//			"fecha_encuesta":"2018-01-12",
+//
+//			"dia_semana":"Martes",
+//			"aforador":"Doe",
+//			"od_encuesta":{
+//				"tipo": "origen",
+//				"estacion": "Sena",
+//
+//				"registros":[
+//					{
+//						"servicio_origen": "B11",
+//						"estacion_origen": "Sena",
+//						"estacion_destino": "Universidades",
+//						"mas_transbordos":false,
+//						"cant_viaje": 1,
+//						"transbordos": [
+//							{
+//								"estacion": "CAD",
+//								"servicio": "F19"
+//							}
+//						]
+//					}
+//				]
+//			}
+//
+//		}
+//	]
+//}

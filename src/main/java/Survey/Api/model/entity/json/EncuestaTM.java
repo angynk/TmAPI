@@ -1,10 +1,7 @@
 package Survey.Api.model.entity.json;
 
 import Survey.Api.model.entity.CuadroEncuesta;
-import Survey.Api.model.entity.db.ADPuntoEncuesta;
-import Survey.Api.model.entity.db.CoDespachosEncuesta;
-import Survey.Api.model.entity.db.FOcupacionEncuesta;
-import Survey.Api.model.entity.db.ODEncuesta;
+import Survey.Api.model.entity.db.*;
 
 
 import java.io.Serializable;
@@ -28,6 +25,7 @@ public class EncuestaTM implements Serializable{
     private ADPuntoEncuesta ad_fijo; // FRECUENCIA OCUPACIÓN
     private CoDespachosEncuesta co_despacho; // CONTEO DESPACHOS
     private ODEncuesta od_encuesta; // ORIGEN DESTINO
+    private FOBus fr_bus; // FRECUENCIA OCUPACION CON NUMERO DE BUS
 
     public EncuestaTM() {
     }
@@ -126,5 +124,13 @@ public class EncuestaTM implements Serializable{
 
     public void setOd_encuesta(ODEncuesta od_encuesta) {
         this.od_encuesta = od_encuesta;
+    }
+
+    public FOBus getFr_bus() {
+        return fr_bus;
+    }
+
+    public void setFr_bus(FOBus fr_bus) {
+        this.fr_bus = fr_bus;
     }
 }

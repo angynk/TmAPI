@@ -34,6 +34,9 @@ public class GuardarDatosEncuesta {
     @Autowired
     ODencuestaServicio oDencuestaServicio;
 
+    @Autowired
+    FOBusServicio foBusServicio;
+
     private static Logger log = Logger.getLogger(QueueEncuesta.class);
 
     public boolean guardarDatosEncuesta(EncuestaTM encuestaTM){
@@ -48,8 +51,22 @@ public class GuardarDatosEncuesta {
             guardarEncuestasConteoDespachos(encuestaTM.getCo_despacho(),encuestaTM);
         }else if ( encuestaTM.getTipo().equals(TipoEncuesta.ENC_ORIGEN_DESTINO)){
             guardarEncuestasOrigenDestino(encuestaTM.getOd_encuesta(),encuestaTM);
+        }else if( encuestaTM.getTipo().equals(TipoEncuesta.ENC_FR_OCUPACION_BUS)){
+            guardarEncuestaFOcupacionBus(encuestaTM.getFr_bus(),encuestaTM);
         }
         return true;
+    }
+
+    private void guardarEncuestaFOcupacionBus(FOBus fr_bus, EncuestaTM encuestaTM) {
+        fr_bus.setFecha_encuesta(encuestaTM.getFecha_encuesta());
+        fr_bus.setDia_semana(encuestaTM.getDia_semana());
+        fr_bus.setAforador(encuestaTM.getAforador());
+        foBusServicio.addFoBus(fr_bus);
+        List<RegistroFOBus> registros = fr_bus.getRegistros();
+        for(RegistroFOBus registroFOBus: registros){
+            registroFOBus.setIdFoBus(fr_bus);
+            foBusServicio.addFOBusRegistro(registroFOBus);
+        }
     }
 
     private void guardarEncuestasOrigenDestino(ODEncuesta od_encuesta, EncuestaTM encuestaTM) {
@@ -69,26 +86,6 @@ public class GuardarDatosEncuesta {
         }
     }
 
-    public List<Resultado> guardarDatosAscDescTroncal(EncuestasTerminadas encuestas){
-        List<Resultado> resultados = new ArrayList<>();
-        for(EncuestaTM encuestaTM:encuestas.getEncuestas()){
-            Resultado resultado = new Resultado();
-            if (encuestaTM.getTipo().equals(TipoEncuesta.ENC_AD_ABORDO)){
-               resultado = guardarEncuestaAscDescAbordo(encuestaTM.getAd_abordo(),encuestaTM);
-            }else if (encuestaTM.getTipo().equals(TipoEncuesta.ENC_FR_OCUPACION)){
-                resultado = guardarEncuestaFOcupacion(encuestaTM.getFr_ocupacion(),encuestaTM);
-            }else if (encuestaTM.getTipo().equals(TipoEncuesta.ENC_AD_PUNTO)){
-                resultado = guardarEncuestaAscDesPunto(encuestaTM.getAd_fijo(),encuestaTM);
-            }else if (encuestaTM.getTipo().equals(TipoEncuesta.ENC_CONT_DESPACHOS)){
-                resultado = guardarEncuestasConteoDespachos(encuestaTM.getCo_despacho(),encuestaTM);
-            }
-
-            resultados.add(resultado);
-
-        }
-
-        return resultados;
-    }
 
     private Resultado guardarEncuestasConteoDespachos(CoDespachosEncuesta co_despacho, EncuestaTM encuestaTM) {
         Resultado resultado = new Resultado();
