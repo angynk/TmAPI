@@ -27,6 +27,8 @@ public class RegistroEncuestaADPunto implements Serializable {
     private int pas_quedan;
     @Column(name = "observacion")
     private String observacion;
+    @Column(name = "servicio")
+    private String servicio;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ad_punto", nullable = false)
@@ -105,5 +107,13 @@ public class RegistroEncuestaADPunto implements Serializable {
 
     public void setObservacion(String observacion) {
         this.observacion = observacion;
+    }
+
+    public String getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(String servicio) {
+        this.servicio = servicio;
     }
 }

@@ -26,6 +26,9 @@ public class ODRegistro implements Serializable {
     @Column(name = "hora_encuesta")
     private String hora_encuesta;
 
+    @Column(name = "comentario")
+    private String comentario;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "odRegistro", cascade = CascadeType.REMOVE)
     private List<ODTransbordo> transbordos;
 
@@ -90,5 +93,13 @@ public class ODRegistro implements Serializable {
 
     public void setIdEncuesta(ODEncuesta idEncuesta) {
         this.idEncuesta = idEncuesta;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 }
