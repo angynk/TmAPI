@@ -1,5 +1,6 @@
 package Survey.Api.controller.processor;
 
+import Survey.Api.controller.endpoint.Modo;
 import Survey.Api.controller.services.ServicioEstacionServicio;
 import Survey.Api.model.entity.Config;
 import Survey.Api.model.entity.EstacionTs;
@@ -7,6 +8,7 @@ import Survey.Api.model.entity.Servicio;
 import Survey.Api.model.entity.db.Estacion;
 import Survey.Api.model.entity.db.ServicioEstacion;
 import Survey.Api.model.entity.db.ServicioTs;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,15 +26,19 @@ public class ConfiguracionEncuesta {
 
     @PostConstruct
     public void init(){
+        cargarDatosTroncal(Modo.TRONCAL);
+        cargarDatosAlimentacion(Modo.ALIMENTACION);
         cargarTodosLosDatos();
     }
 
 
-    private Config  config ;
+    private Config  configTroncal ;
+    private Config  configAlimentacion ;
+    private Config  config;
 
-    public List<Servicio> cargarInfoServicios(){
+    public List<Servicio> cargarInfoServicios(String modo){
         List<Servicio> servicios = new ArrayList<>();
-        List<ServicioTs> todosLosServicios = servicioEstacionServicio.encontrarTodosLosServicios();
+        List<ServicioTs> todosLosServicios = servicioEstacionServicio.encontrarTodosLosServicios(modo);
         for(ServicioTs servicioTs:todosLosServicios) {
             List<String> listaEstaciones = encontrarEstacionesPorServicio(servicioTs);
             if(listaEstaciones.size()>0){
@@ -42,9 +48,9 @@ public class ConfiguracionEncuesta {
         return servicios;
     }
 
-    public List<EstacionTs> cargarServicios(){
+    public List<EstacionTs> cargarServicios(String modo){
         List<EstacionTs> estaciones = new ArrayList<>();
-        List<Estacion> todasLasEstaciones = servicioEstacionServicio.encontrarTodasLasEstaciones();
+        List<Estacion> todasLasEstaciones = servicioEstacionServicio.encontrarTodasLasEstaciones(modo);
         for(Estacion estacion:todasLasEstaciones){
             List<String> listaServicios = encontrarServiciosPorEstacion(estacion);
             if(listaServicios.size()>0){
@@ -76,12 +82,28 @@ public class ConfiguracionEncuesta {
     public Config cargarTodosLosDatos() {
 
         config = new Config();
-        List<Servicio> servicios = cargarInfoServicios();
-        List<EstacionTs> estaaciones = cargarServicios();
+        List<Servicio> servicios = cargarInfoServicios("");
+        List<EstacionTs> estaaciones = cargarServicios("");
         config.setEstacionTs(estaaciones);
         config.setServicios(servicios);
 
         return config;
+    }
+
+    public void cargarDatosTroncal(String modo){
+        configTroncal = new Config();
+        List<Servicio> servicios = cargarInfoServicios(modo);
+        List<EstacionTs> estaaciones = cargarServicios(modo);
+        configTroncal.setEstacionTs(estaaciones);
+        configTroncal.setServicios(servicios);
+    }
+
+    public void cargarDatosAlimentacion(String modo){
+        configAlimentacion = new Config();
+        List<Servicio> servicios = cargarInfoServicios(modo);
+        List<EstacionTs> estaaciones = cargarServicios(modo);
+        configAlimentacion.setEstacionTs(estaaciones);
+        configAlimentacion.setServicios(servicios);
     }
 
     public Config getConfig() {
@@ -92,8 +114,38 @@ public class ConfiguracionEncuesta {
         this.config = config;
     }
 
-    public void updateServicios() {
-//        serviciosSender.sendMessage("Actualizar");
-        cargarTodosLosDatos();
+    public Config getConfigTroncal() {
+        return configTroncal;
+    }
+
+    public void setConfigTroncal(Config configTroncal) {
+        this.configTroncal = configTroncal;
+    }
+
+    public Config getConfigAlimentacion() {
+        return configAlimentacion;
+    }
+
+    public void setConfigAlimentacion(Config configAlimentacion) {
+        this.configAlimentacion = configAlimentacion;
+    }
+
+    public void updateServicios(String modo) {
+        if(modo.equals(Modo.TRONCAL)){
+            cargarDatosTroncal(modo);
+        }else if(modo.equals(Modo.ALIMENTACION)){
+            cargarDatosAlimentacion(modo);
+        }
+
+         cargarTodosLosDatos();
+    }
+
+    public Config getConfiguracion(String modo) {
+        if(modo.equals(Modo.TRONCAL)){
+            return configTroncal;
+        }else if(modo.equals(Modo.ALIMENTACION)){
+            return configAlimentacion;
+        }
+        return config;
     }
 }

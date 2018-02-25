@@ -51,8 +51,8 @@ public class ServicioEstacionServicio {
         this.servicioEstacionDao = servicioEstacionDao;
     }
 
-    public List<ServicioTs> encontrarTodosLosServicios(){
-       return servicioDao.encontrarTodosLosServicios();
+    public List<ServicioTs> encontrarTodosLosServicios(String modo){
+       return servicioDao.encontrarTodosLosServicios(modo);
     }
 
     public List<ServicioEstacion> encontrarEstacionesAsociadas(ServicioTs servicioTs) {
@@ -63,8 +63,8 @@ public class ServicioEstacionServicio {
         return servicioEstacionDao.encontrarTodo();
     }
 
-    public List<Estacion> encontrarTodasLasEstaciones() {
-        return estacionDao.encontrarTodo();
+    public List<Estacion> encontrarTodasLasEstaciones(String modo) {
+        return estacionDao.encontrarTodo(modo);
     }
 
     public List<ServicioEstacion> encontrarServiciosAsociadas(Estacion estacion) {

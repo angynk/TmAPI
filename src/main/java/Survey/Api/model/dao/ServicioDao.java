@@ -4,6 +4,7 @@ import Survey.Api.model.entity.db.ServicioTs;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,9 +27,11 @@ public class ServicioDao {
         this.sessionFactory = sessionFactory;
     }
 
-    public List<ServicioTs> encontrarTodosLosServicios(){
+    public List<ServicioTs> encontrarTodosLosServicios(String modo){
         Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(ServicioTs.class);
-///       criteria.add(Restrictions.eq("usuario", user));
+        if(modo!=""){
+            criteria.add(Restrictions.eq("tipo", modo));
+        }
         criteria.addOrder(Order.asc("nombre"));
         return  criteria.list();
     }
