@@ -28,12 +28,16 @@ public class ConfiguracionEncuesta {
     public void init(){
         cargarDatosTroncal(Modo.TRONCAL);
         cargarDatosAlimentacion(Modo.ALIMENTACION);
+        cargarDatosTroncalOD(Modo.TRONCAL_ORIGEN_DESTINO);
+        cargarDatosZonal(Modo.ZONAL);
         cargarTodosLosDatos();
     }
 
 
     private Config  configTroncal ;
+    private Config  configTroncalOD ;
     private Config  configAlimentacion ;
+    private Config  configZonal ;
     private Config  config;
 
     public List<Servicio> cargarInfoServicios(String modo){
@@ -106,6 +110,22 @@ public class ConfiguracionEncuesta {
         configAlimentacion.setServicios(servicios);
     }
 
+    public void cargarDatosTroncalOD(String modo){
+        configTroncalOD = new Config();
+        List<Servicio> servicios = cargarInfoServicios(modo);
+        List<EstacionTs> estaaciones = cargarServicios(modo);
+        configTroncalOD.setEstacionTs(estaaciones);
+        configTroncalOD.setServicios(servicios);
+    }
+
+    public void cargarDatosZonal(String modo){
+        configZonal = new Config();
+        List<Servicio> servicios = cargarInfoServicios(modo);
+        List<EstacionTs> estaaciones = cargarServicios(modo);
+        configZonal.setEstacionTs(estaaciones);
+        configZonal.setServicios(servicios);
+    }
+
     public Config getConfig() {
         return config;
     }
@@ -130,11 +150,39 @@ public class ConfiguracionEncuesta {
         this.configAlimentacion = configAlimentacion;
     }
 
+    public ServicioEstacionServicio getServicioEstacionServicio() {
+        return servicioEstacionServicio;
+    }
+
+    public void setServicioEstacionServicio(ServicioEstacionServicio servicioEstacionServicio) {
+        this.servicioEstacionServicio = servicioEstacionServicio;
+    }
+
+    public Config getConfigTroncalOD() {
+        return configTroncalOD;
+    }
+
+    public void setConfigTroncalOD(Config configTroncalOD) {
+        this.configTroncalOD = configTroncalOD;
+    }
+
+    public Config getConfigZonal() {
+        return configZonal;
+    }
+
+    public void setConfigZonal(Config configZonal) {
+        this.configZonal = configZonal;
+    }
+
     public void updateServicios(String modo) {
         if(modo.equals(Modo.TRONCAL)){
             cargarDatosTroncal(modo);
         }else if(modo.equals(Modo.ALIMENTACION)){
             cargarDatosAlimentacion(modo);
+        }else if(modo.equals(Modo.TRONCAL_ORIGEN_DESTINO)){
+            cargarDatosTroncalOD(modo);
+        }else if(modo.equals(Modo.ZONAL)){
+            cargarDatosZonal(modo);
         }
 
          cargarTodosLosDatos();
@@ -145,6 +193,10 @@ public class ConfiguracionEncuesta {
             return configTroncal;
         }else if(modo.equals(Modo.ALIMENTACION)){
             return configAlimentacion;
+        }else if(modo.equals(Modo.TRONCAL_ORIGEN_DESTINO)){
+            return configTroncalOD;
+        }else if(modo.equals(Modo.ZONAL)){
+            return configZonal;
         }
         return config;
     }
