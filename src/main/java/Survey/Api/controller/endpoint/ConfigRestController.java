@@ -1,8 +1,12 @@
 package Survey.Api.controller.endpoint;
 
 import Survey.Api.controller.processor.ConfiguracionEncuesta;
+import Survey.Api.controller.services.ModoServicio;
 import Survey.Api.model.entity.Config;
+import Survey.Api.model.entity.ConfigModo;
 import Survey.Api.model.entity.Servicio;
+import Survey.Api.model.entity.db.*;
+import Survey.Api.model.entity.db.Modo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +24,8 @@ public class ConfigRestController {
     @Autowired
     public ConfiguracionEncuesta configuracionEncuesta;
 
+
+
     @RequestMapping(value = "/servicios/", method = RequestMethod.GET)
     public ResponseEntity<List<Servicio>> getServiciosEstacionesConfiguration() {
         List<Servicio> servicios = configuracionEncuesta.cargarInfoServicios("");
@@ -32,16 +38,17 @@ public class ConfigRestController {
         return new ResponseEntity<Config>(config, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/serviciosEstaciones/", method = RequestMethod.GET)
-    public ResponseEntity<Config> getServicioEstaciones() {
-        Config config = configuracionEncuesta.getConfiguracion("od");
-        return new ResponseEntity<Config>(config, HttpStatus.OK);
-    }
-
     @RequestMapping(value = "/updateServicios/", method = RequestMethod.GET)
     public ResponseEntity<Boolean> updateServiciosEstaciones(@RequestParam("modo") String modo) {
         configuracionEncuesta.updateServicios(modo);
         return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value = "/modos/", method = RequestMethod.GET)
+    public ResponseEntity<ConfigModo> getModos() {
+        ConfigModo config = configuracionEncuesta.getConfiguracionModos();
+        return new ResponseEntity<ConfigModo>(config, HttpStatus.OK);
     }
 
 }

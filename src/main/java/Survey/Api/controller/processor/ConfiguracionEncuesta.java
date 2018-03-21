@@ -1,8 +1,10 @@
 package Survey.Api.controller.processor;
 
 import Survey.Api.controller.endpoint.Modo;
+import Survey.Api.controller.services.ModoServicio;
 import Survey.Api.controller.services.ServicioEstacionServicio;
 import Survey.Api.model.entity.Config;
+import Survey.Api.model.entity.ConfigModo;
 import Survey.Api.model.entity.EstacionTs;
 import Survey.Api.model.entity.Servicio;
 import Survey.Api.model.entity.db.Estacion;
@@ -13,8 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class ConfiguracionEncuesta {
@@ -22,17 +23,37 @@ public class ConfiguracionEncuesta {
     @Autowired
     private ServicioEstacionServicio servicioEstacionServicio;
 
-
+    @Autowired
+    public ModoServicio modoServicio;
 
     @PostConstruct
     public void init(){
-        cargarDatosTroncal(Modo.TRONCAL);
-        cargarDatosAlimentacion(Modo.ALIMENTACION);
-        cargarDatosTroncalOD(Modo.TRONCAL_ORIGEN_DESTINO);
-        cargarDatosZonal(Modo.ZONAL);
-        cargarTodosLosDatos();
+//        cargarDatosTroncal(Modo.TRONCAL);
+//        cargarDatosAlimentacion(Modo.ALIMENTACION);
+//        cargarDatosTroncalOD(Modo.TRONCAL_ORIGEN_DESTINO);
+//        cargarDatosZonal(Modo.ZONAL);
+//        cargarTodosLosDatos();
+          actualizarListaConfiguracionModos();
     }
 
+    private void actualizarListaConfiguracionModos() {
+        cofiguracionModos = new HashMap<String, Config>();
+        List<Survey.Api.model.entity.db.Modo> modosLista = modoServicio.getModoAll();
+        for(Survey.Api.model.entity.db.Modo modo:modosLista){
+            cofiguracionModos.put(modo.getAbreviatura(),cargarDatosModo(modo.getAbreviatura()));
+        }
+    }
+
+    private Config cargarDatosModo(String modo) {
+        Config config = new Config();
+        List<Servicio> servicios = cargarInfoServicios(modo);
+        List<EstacionTs> estaaciones = cargarServicios(modo);
+        config.setEstacionTs(estaaciones);
+        config.setServicios(servicios);
+        return config;
+    }
+
+    private HashMap<String,Config> cofiguracionModos;
 
     private Config  configTroncal ;
     private Config  configTroncalOD ;
@@ -175,29 +196,52 @@ public class ConfiguracionEncuesta {
     }
 
     public void updateServicios(String modo) {
-        if(modo.equals(Modo.TRONCAL)){
-            cargarDatosTroncal(modo);
-        }else if(modo.equals(Modo.ALIMENTACION)){
-            cargarDatosAlimentacion(modo);
-        }else if(modo.equals(Modo.TRONCAL_ORIGEN_DESTINO)){
-            cargarDatosTroncalOD(modo);
-        }else if(modo.equals(Modo.ZONAL)){
-            cargarDatosZonal(modo);
-        }
+//        if(modo.equals(Modo.TRONCAL)){
+//            cargarDatosTroncal(modo);
+//        }else if(modo.equals(Modo.ALIMENTACION)){
+//            cargarDatosAlimentacion(modo);
+//        }else if(modo.equals(Modo.TRONCAL_ORIGEN_DESTINO)){
+//            cargarDatosTroncalOD(modo);
+//        }else if(modo.equals(Modo.ZONAL)){
+//            cargarDatosZonal(modo);
+//        }
+//
+//         cargarTodosLosDatos();
 
-         cargarTodosLosDatos();
+        Config config = cargarDatosModo(modo);
+        cofiguracionModos.remove(modo);
+        cofiguracionModos.put(modo,config);
     }
 
     public Config getConfiguracion(String modo) {
-        if(modo.equals(Modo.TRONCAL)){
-            return configTroncal;
-        }else if(modo.equals(Modo.ALIMENTACION)){
-            return configAlimentacion;
-        }else if(modo.equals(Modo.TRONCAL_ORIGEN_DESTINO)){
-            return configTroncalOD;
-        }else if(modo.equals(Modo.ZONAL)){
-            return configZonal;
+        Config config = cofiguracionModos.get(modo);
+        if(config==null){
+            config = new Config();
         }
+//        if(modo.equals(Modo.TRONCAL)){
+//            return configTroncal;
+//        }else if(modo.equals(Modo.ALIMENTACION)){
+//            return configAlimentacion;
+//        }else if(modo.equals(Modo.TRONCAL_ORIGEN_DESTINO)){
+//            return configTroncalOD;
+//        }else if(modo.equals(Modo.ZONAL)){
+//            return configZonal;
+//        }
         return config;
+    }
+
+    public ConfigModo getConfiguracionModos() {
+        ConfigModo configModo = new ConfigModo();
+        List<Survey.Api.model.entity.db.Modo> modos = modoServicio.getModoAll();
+        configModo.setModos(modos);
+        return configModo;
+    }
+
+    public HashMap<String, Config> getCofiguracionModos() {
+        return cofiguracionModos;
+    }
+
+    public void setCofiguracionModos(HashMap<String, Config> cofiguracionModos) {
+        this.cofiguracionModos = cofiguracionModos;
     }
 }
