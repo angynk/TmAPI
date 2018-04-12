@@ -26,6 +26,8 @@ public class EncuestaTM implements Serializable{
     private CoDespachosEncuesta co_despacho; // CONTEO DESPACHOS
     private ODEncuesta od_encuesta; // ORIGEN DESTINO
     private FOBus fr_bus; // FRECUENCIA OCUPACION CON NUMERO DE BUS
+    private TRecorridosEncuesta ti_recorridos; // TIEMPOS DE RECORRIDO
+
 
     public EncuestaTM() {
     }
@@ -132,5 +134,13 @@ public class EncuestaTM implements Serializable{
 
     public void setFr_bus(FOBus fr_bus) {
         this.fr_bus = fr_bus;
+    }
+
+    public TRecorridosEncuesta getTi_recorridos() {
+        return ti_recorridos;
+    }
+
+    public void setTi_recorridos(TRecorridosEncuesta ti_recorridos) {
+        this.ti_recorridos = ti_recorridos;
     }
 }

@@ -32,11 +32,4 @@ public class SurveyRestController {
     }
 
 
-    @RequestMapping(value = "/test/", method = RequestMethod.GET)
-    public ResponseEntity<List<String>> listAllUsers() {
-        List<String> prueba = new ArrayList<>();
-        prueba.add("Hola");
-        return new ResponseEntity<List<String>>(prueba, HttpStatus.OK);
-    }
-
 }

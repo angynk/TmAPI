@@ -37,6 +37,9 @@ public class GuardarDatosEncuesta {
     @Autowired
     FOBusServicio foBusServicio;
 
+    @Autowired
+    EncuestaTiemposRecorridoServicio tiemposRecorridoServicio;
+
     private static Logger log = Logger.getLogger(QueueEncuesta.class);
 
     public boolean guardarDatosEncuesta(EncuestaTM encuestaTM){
@@ -53,6 +56,8 @@ public class GuardarDatosEncuesta {
             guardarEncuestasOrigenDestino(encuestaTM.getOd_encuesta(),encuestaTM);
         }else if( encuestaTM.getTipo().equals(TipoEncuesta.ENC_FR_OCUPACION_BUS)){
             guardarEncuestaFOcupacionBus(encuestaTM.getFr_bus(),encuestaTM);
+        }else if( encuestaTM.getTipo().equals(TipoEncuesta.ENC_TIEMPOS_RECORRIDO)){
+            guardarEncuestaTiemposRecorrido(encuestaTM.getTi_recorridos(),encuestaTM);
         }
         return true;
     }
@@ -107,6 +112,27 @@ public class GuardarDatosEncuesta {
         }
         return resultado;
     }
+
+    private Resultado guardarEncuestaTiemposRecorrido(TRecorridosEncuesta t_recorridos, EncuestaTM encuestaTM) {
+        Resultado resultado = new Resultado();
+        try{
+            t_recorridos.setFecha_encuesta(encuestaTM.getFecha_encuesta());
+            t_recorridos.setAforador(encuestaTM.getAforador());
+            tiemposRecorridoServicio.addTiempoRecorridos(t_recorridos);
+            List<RegistroTRecorridos> registros = t_recorridos.getRegistros();
+            for(RegistroTRecorridos registro:registros){
+                registro.settRecorridosEncuesta(t_recorridos);
+                tiemposRecorridoServicio.addRegistroTiempoRecorridos(registro);
+            }
+            resultado = retornarResultadoPositivo(encuestaTM);
+
+        }catch(Exception e){
+            retornarResultadoNegativo(e,encuestaTM);
+        }
+        return resultado;
+    }
+
+
 
     private Resultado guardarEncuestaAscDesPunto(ADPuntoEncuesta ad_fijo, EncuestaTM encuestaTM) {
         Resultado resultado = new Resultado();

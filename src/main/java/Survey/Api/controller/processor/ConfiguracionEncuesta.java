@@ -28,11 +28,6 @@ public class ConfiguracionEncuesta {
 
     @PostConstruct
     public void init(){
-//        cargarDatosTroncal(Modo.TRONCAL);
-//        cargarDatosAlimentacion(Modo.ALIMENTACION);
-//        cargarDatosTroncalOD(Modo.TRONCAL_ORIGEN_DESTINO);
-//        cargarDatosZonal(Modo.ZONAL);
-//        cargarTodosLosDatos();
           actualizarListaConfiguracionModos();
     }
 
@@ -196,17 +191,6 @@ public class ConfiguracionEncuesta {
     }
 
     public void updateServicios(String modo) {
-//        if(modo.equals(Modo.TRONCAL)){
-//            cargarDatosTroncal(modo);
-//        }else if(modo.equals(Modo.ALIMENTACION)){
-//            cargarDatosAlimentacion(modo);
-//        }else if(modo.equals(Modo.TRONCAL_ORIGEN_DESTINO)){
-//            cargarDatosTroncalOD(modo);
-//        }else if(modo.equals(Modo.ZONAL)){
-//            cargarDatosZonal(modo);
-//        }
-//
-//         cargarTodosLosDatos();
 
         Config config = cargarDatosModo(modo);
         cofiguracionModos.remove(modo);
@@ -218,15 +202,6 @@ public class ConfiguracionEncuesta {
         if(config==null){
             config = new Config();
         }
-//        if(modo.equals(Modo.TRONCAL)){
-//            return configTroncal;
-//        }else if(modo.equals(Modo.ALIMENTACION)){
-//            return configAlimentacion;
-//        }else if(modo.equals(Modo.TRONCAL_ORIGEN_DESTINO)){
-//            return configTroncalOD;
-//        }else if(modo.equals(Modo.ZONAL)){
-//            return configZonal;
-//        }
         return config;
     }
 
