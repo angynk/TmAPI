@@ -18,7 +18,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackages = "Survey.Api")
-@PropertySource(value = { "classpath:application.properties" })
+@PropertySource(value = { "classpath:cloudDb.properties" })
 public class HibernateConfiguration {
 
     @Autowired
